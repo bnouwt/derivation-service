@@ -5,4 +5,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>${project.artifactId}</name>
   <description>This project will extend Apache Jena Fuseki with a service to request the derivation log for a particular fact. It should also add some form of GUI to Fuseki to make it easily demonstrable.</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.jena</groupId>
+  		<artifactId>jena-fuseki-embedded</artifactId>
+  		<version>3.7.0</version>
+  	</dependency>
+  </dependencies>
 </project>
