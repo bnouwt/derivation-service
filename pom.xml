@@ -1,15 +1,57 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>nl.tno.ict.ds.cb</groupId>
-  <artifactId>explainable-fuseki</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>${project.artifactId}</name>
-  <description>This project will extend Apache Jena Fuseki with a service to request the derivation log for a particular fact. It should also add some form of GUI to Fuseki to make it easily demonstrable.</description>
-  <dependencies>
-  	<dependency>
-  		<groupId>org.apache.jena</groupId>
-  		<artifactId>jena-fuseki-embedded</artifactId>
-  		<version>3.7.0</version>
-  	</dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>nl.tno.ict.ds.cb</groupId>
+	<artifactId>explainable-fuseki</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>${project.artifactId}</name>
+	<description>This project will extend Apache Jena Fuseki with a service to request the derivation log for a particular fact. It should also add some form of GUI to Fuseki to make it easily demonstrable.</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-fuseki-embedded</artifactId>
+			<version>3.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.0.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.0.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>1.0.3</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<inherited>true</inherited>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
 </project>
