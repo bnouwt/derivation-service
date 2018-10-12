@@ -9,11 +9,10 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import org.apache.jena.fuseki.build.FusekiBuilder;
-import org.apache.jena.fuseki.embedded.FusekiServer;
+import org.apache.jena.fuseki.main.FusekiServer;
 import org.apache.jena.fuseki.server.DataService;
 import org.apache.jena.fuseki.server.Operation;
 import org.apache.jena.fuseki.servlets.ActionService;
-import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.rdf.model.InfModel;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -48,6 +47,8 @@ class DerivationServiceTest {
 
 	@Test
 	void testDerivationServie() {
+
+		LOG.info("DerivationTest started");
 
 		// Create a DataService and add the endpoint -> operation association.
 		// This still needs the server to have the operation registered.
