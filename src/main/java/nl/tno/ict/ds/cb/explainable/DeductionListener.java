@@ -28,40 +28,34 @@ import org.slf4j.LoggerFactory;
  *         service to Plasido.
  *
  */
-public class EventContextListener implements ServletContextListener {
+public class DeductionListener implements ServletContextListener {
 
 	/**
 	 * The log facility of this class.
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(EventContextListener.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DeductionListener.class);
 
-	private static final Operation newOp = Operation.register("Event", "Event service");
+	//private static final Operation newOp = Operation.register("Event", "Event service");
 	//private static final String contentType = "text/plain";
-	private static final String endpointName = "event";
+	//private static final String endpointName = "event";
 	//private final ActionService eventHandler = new DerivationService();
-	private final GraphListener eventHandler = new EventService();
+	private final GraphListener deductionHandler = new DeductionService();
 
 	/**
-	 * Add EventService to this Fuseki instance.
+	 * Add Deduction Service to this Fuseki instance.
 	 */
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		LOG.debug("Entered Event context listener.");
+		LOG.info("Entered deduction listener.");
 		ServletContext sc = sce.getServletContext();
-
-		//ServiceDispatchRegistry registry = ServiceDispatchRegistry.get(sc);
-
-		//registry.register(newOp, contentType, eventHandler);
-		//LOG.debug("Registered operation {} contenttype {} and handler {}.", newOp, contentType, eventHandler);
-
 		DataAccessPointRegistry dapReg = DataAccessPointRegistry.get(sc);
 
-		LOG.debug("Adding the event service to the following datasets: ");
+		LOG.info("Adding the deduction service to the following datasets: ");
 		for (String key : dapReg.keys()) {
 			DataAccessPoint dap = dapReg.get(key);
 			DataService ds = dap.getDataService();
 
-			// enable event logging
+			// enable deduction listening
 			DatasetGraph dg = ds.getDataset();
 			Graph g = dg.getDefaultGraph();
 
@@ -70,12 +64,8 @@ public class EventContextListener implements ServletContextListener {
 			InfGraph ig = null;
 			if (g instanceof InfGraph) {
 				ig = (InfGraph) g;
-				ig.getDeductionsGraph().getEventManager().register(eventHandler);
-				LOG.debug("Enabled event listening on deductions graph in dataset '{}'.", key);				
-				ig.setDerivationLogging(true);
-				LOG.debug("Enabled event logging on dataset '{}'.", key);
-				ds.addEndpoint(newOp, endpointName);
-				LOG.info("Event logging service /event enabled on dataset '{}'", key);
+				ig.getDeductionsGraph().getEventManager().register(deductionHandler);
+				LOG.info("Enabled deduction listening on default graph in dataset '{}'.", key);				
 			} else {
 				LOG.warn("Dataset '{}' should have an InfGraph as defaultGraph.", key);
 			}

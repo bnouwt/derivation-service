@@ -3,9 +3,22 @@
  */
 package nl.tno.ict.ds.cb.explainable;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.Message;
+import javax.jms.MessageProducer;
+import javax.jms.Queue;
+import javax.jms.Session;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.broker.BrokerFactory;
+import org.apache.activemq.broker.BrokerService;
+import org.apache.jena.atlas.logging.Log;
 import org.apache.jena.graph.Graph;
 import org.apache.jena.graph.GraphListener;
 import org.apache.jena.graph.Triple;
@@ -21,15 +34,40 @@ import org.apache.jena.reasoner.rulesys.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EventService implements GraphListener {
+public class DeductionService implements GraphListener {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(EventService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DeductionService.class);
+	private BrokerService broker;
+	
+	public DeductionService() {
+		LOG.info("New EventService initialized");
+		try {
+			broker = BrokerFactory.createBroker(new URI("broker:(tcp://0.0.0.0:61616)"));
+			broker.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void notifyAddTriple(Graph g, Triple t) {
 		// TODO Auto-generated method stub
         LOG.info(">> graph listener noticed triple added " + t);
-
+		try {
+	        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://0.0.0.0:61616");
+			Connection connection = connectionFactory.createConnection();
+			Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
+	        Queue queue = session.createQueue("DeductionsQueue");
+	        String payload = "Triple added " + t.toString();
+	        Message msg = session.createTextMessage(payload);
+	        MessageProducer producer = session.createProducer(queue);
+	        System.out.println("Sending text '" + payload + "'");
+	        producer.send(msg);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
