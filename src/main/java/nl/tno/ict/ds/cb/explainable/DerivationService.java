@@ -1,20 +1,31 @@
 package nl.tno.ict.ds.cb.explainable;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.jena.atlas.logging.Log;
 import org.apache.jena.fuseki.servlets.ActionREST;
 import org.apache.jena.fuseki.servlets.HttpAction;
 import org.apache.jena.fuseki.servlets.ServletOps;
 import org.apache.jena.graph.Graph;
 import org.apache.jena.graph.Triple;
+import org.apache.jena.ontology.OntModelSpec;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.Derivation;
 import org.apache.jena.reasoner.InfGraph;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.WebContent;
 import org.apache.jena.sparql.core.DatasetGraph;
 import org.apache.jena.sparql.sse.SSE;
+import org.apache.jena.util.iterator.ExtendedIterator;
 import org.apache.jena.web.HttpSC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +37,8 @@ public class DerivationService extends ActionREST {
 	/**
 	 * The log facility of this class.
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(DerivationService.class);
+	private final static Logger LOG = LoggerFactory.getLogger(DerivationService.class);
+	private final static String ns = "https://www.tno.nl/ontology/knowledgeBaseExplanationPOC#";
 
 	@Override
 	protected void doDelete(HttpAction action) {
@@ -41,7 +53,7 @@ public class DerivationService extends ActionREST {
 		// since derivations need to be enabled for this service to work
 		// we need to somehow hook into the startup of the dataset and call
 		// org.apache.jena.rdf.model.InfModel.setDerivationLogging(boolean)
-
+		
 		HttpServletRequest req = action.getRequest();
 		String stringTriple = req.getParameter(TRIPLE_REQUEST_PARAMETER_NAME);
 		LOG.info("Received triple {}.", stringTriple);
@@ -61,29 +73,54 @@ public class DerivationService extends ActionREST {
 
 		InfGraph ig = (InfGraph) g;
 
+		//TODO: check backwards reasoning rules
+		
 		// check if derivations are enabled
 		// apparently, we cannot check this! See
 		// org.apache.jena.reasoner.rulesys.BasicForwardRuleInfGraph.shouldLogDerivations()
 
+		//Iterator<Triple> findIterator = ig.find(t);
+		//LOG.info("FindIterator has items?: {}", findIterator.hasNext());
+		
 		// retrieve the derivations of the given triple
 		Iterator<Derivation> derIter = ig.getDerivation(t);
 
 		LOG.info("Iterator has items?: {}", derIter.hasNext());
+		
+	
+		boolean contains = ig.contains(t);
+		LOG.info("Graph contains triple: {}", contains);
+		LOG.info("Graph has size: {}", ig.size());
+		
+		// print all triples
+		/*
+		ExtendedIterator<Triple> it = ig.find();
+		while(it.hasNext()) {
+			Triple triple = it.next();
+			LOG.info("Next triple: {}", triple);
+		}
+		*/
+		
+		Model mortgageOntology = ModelFactory.createDefaultModel();
+		InputStream is = DerivationCollector.class.getResourceAsStream("/proofOfConcept.ttl");
+		mortgageOntology.read(is, ns, "TURTLE");
+		DerivationCollector derivationCollector = new DerivationCollector(ig, mortgageOntology);
 
-		// convert it into some JSON format
-		// we do not have access to the actual structure of the derivations. This
-		// probably requires a modification to the Derivation interface.
-		// for now we just return plain text.
 		Derivation d;
-		while (derIter.hasNext()) {
+		while(derIter.hasNext()) {
 			d = derIter.next();
 			try {
-				d.printTrace(action.response.getWriter(), true);
+				Model ontModel = derivationCollector.combine(d);
+				//rdfModel.write(action.response.getOutputStream(), "TURTLE");
+				LOG.info("Writing the model to outputstream");
+			
+				RDFDataMgr.write(action.response.getOutputStream(), ontModel, Lang.RDFXML);
+				action.response.getOutputStream().flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-
+		
 		action.response.setStatus(HttpSC.OK_200);
 		action.response.setContentType(WebContent.contentTypeTextPlain);
 

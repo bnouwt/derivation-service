@@ -1,0 +1,1826 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://www.tno.nl/ontology/knowledgeBaseExplanation#"
+     xml:base="https://www.tno.nl/ontology/knowledgeBaseExplanation"
+     xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:tree="http://www.odp.org/tree#"
+     xmlns:terms="http://purl.org/dc/terms/">
+   <owl:Ontology rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation"> 
+     <!--   <owl:imports rdf:resource="http://daselab.cs.wright.edu/data/ODP-Tree.owl"/> -->
+        <terms:coverage rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The ontology covers the most commonly used means of explanation for the following types of knowledge bases: expert systems, machine learning models and Bayesian networks. It is intended to be extended for other knowledge bases a future use case gives rise to.</terms:coverage>
+        <terms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cornelis Bouter</terms:creator>
+        <terms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">See rdfs:comment.</terms:description>
+        <terms:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This ontology captures several types of explanation that occur in the literature on explainable machine learning, Bayesian networks and rule-based expert systems. Each explanation consists of an explanandum (that which has to be explained) and an explanans (the part that performs the explaining the explanandum). The explanandum is usually just a fact, or more generally an event. The explanans can take multiple forms: set of facts combined with a rule, a set of important features, a prototype, etc, or a combination of those.
+
+The ontology, especially the Explanans class, is intended to be extended for any further type of explanation that occurs in a use case. Currently, it differentiates between model explanation, outcome explanation, model inspection and transparent box design (Guidotti 2018). This taxonomy was compared with other taxonomies and adopted into this ontology by Bouter (2019).
+
+The knowledge base module can also be extended for other knowledge bases beyond rule based expert systems, machine learning systems and bayesian Networks. Depending on ML trends a changing the machine learning system subconcepts may be necessary. A type of knowledge base that may have to be added in a future use case is a case-based reasoner.
+
+The structure with each Explanation having an Explanandum as a hasExplanandum-filler and an Explanans as an Explanans-filler cannot be changed. Nor should the connection between several Explanations (currently on hasExplanandum=== inv(hasExplanation) and on hasExplainablePart) be changed. Then the competency question as stated in the corresponding thesis will not be correct anymore.</terms:description>
+        <terms:publisher rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TNO</terms:publisher>
+        <terms:relation rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://ontologydesignpatterns.org/wiki/Submissions:Tree_Pattern</terms:relation>
+        <terms:relation rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/kmitd/various/blob/master/explanation-ontology.owl</terms:relation>
+        <terms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://daselab.cs.wright.edu/data/ODP-Tree.owl</terms:source>
+        <terms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.ontologydesignpatterns.org/ont/dul/DUL.owl</terms:source>
+        <terms:source rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://github.com/kmitd/various/blob/master/explanation-ontology.owl</terms:source>
+        <terms:subject rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">artificial intelligence, explanation, knowledge base, machine learning, Bayesian network, expert system, explainable artificial intelligence, explainable machine learning, explainable data science, interoperability</terms:subject>
+        <terms:title rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">Explanation Ontology</terms:title>
+        <rdfs:seeAlso>Master&apos;s thesis Cornelis Bouter</rdfs:seeAlso>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/coverage -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/coverage"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/publisher -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/publisher"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/relation -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/relation"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/source -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/source"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/subject -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/subject"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#conceptualizes -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#conceptualizes">
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isConceptualizedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+        <rdfs:comment>Inverse of isConceptualizedBy, also taken from D&amp;S Ultralite.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart">
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <rdfs:comment>An Explanans concept primarily plays the role of the thing that explains the Explanandum. However, the Explanans itself may also need an explanation, or consist of parts that need an explanation. The hasExplainablePart connects the Explanans to all its parts that MAY themselves need an explanation. 
+
+This relation is also very important for the construction of a ExplanationTree.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainableProxy -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainableProxy">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainableProxyOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxyExplanans"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy"/>
+        <rdfs:comment>This role relates an Explanans to its explainable part, when that explainable part is an Explainable Proxy.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanandum -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanandum">
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanation"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+        <rdfs:comment>A relation connecting a Explanation concept to is Explanandum.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanans -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanans">
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplaining"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <rdfs:comment>The relaiton connecting an Explanation concept to its Explanans.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanation -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanation">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+        <rdfs:comment>The relation connection an Explanandum backwards to the Explanation concept where its corresponding Explanans is also related to.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanationChild -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanationChild">
+        <rdfs:subPropertyOf rdf:resource="http://www.odp.org/tree#hasChild"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanationParent"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+        <rdfs:comment>This role relates two Explanation via the hasExplanandum o hasExplainablePart o hasExplanans.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">hasExplanans o hasExplanation 
+and
+hasExplanans o hasExplainablePart o hasExplanation
+were intended as subchains, but cannot because of OWL 2 DL global restrictions.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanationParent -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanationParent">
+        <rdfs:subPropertyOf rdf:resource="http://www.odp.org/tree#hasParent"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+        <rdfs:seeAlso rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanationChild"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFact -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFact">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isFactOf"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+        <owl:propertyDisjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFoil"/>
+        <rdfs:comment>This object property is intended to capture the Fact that is the explanandum. It may also have a Foil. In that case, the Explanandum is not simple, but is contrastive.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFactChild -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFactChild">
+        <rdfs:subPropertyOf rdf:resource="http://www.odp.org/tree#hasChild"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFactParent"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <owl:propertyDisjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleChild"/>
+        <rdfs:comment>An edge in a RuleDerivationTree indicating the child of a node where a fact resides. Afterall, a RuleDerivationNode should include both a Rulechild and some FactChild.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFactParent -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFactParent">
+        <rdfs:subPropertyOf rdf:resource="http://www.odp.org/tree#hasParent"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <owl:propertyDisjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleParent"/>
+        <rdfs:seeAlso rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFactChild"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFeatureImportanceItem -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFeatureImportanceItem">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isFeatureImportanceItemOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceExplanans"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceItem"/>
+        <rdfs:comment>A role relating the Explanans to an explainable part that is a Feature Item.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFoil -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFoil">
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isFoilOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ContrastiveExplanandum"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+        <rdfs:comment>The Foil is part of a Contrastive Explanation, where not a single fact is explained, but rather the contrast between Fact and Foil.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasLocalExplanation -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasLocalExplanation">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isLocalExplanationOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanationExplanans"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanation"/>
+        <rdfs:comment>A role relating the Explanans to one of its explainable parts, that is in this case a local explanation.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasPrototypeSelectionItem -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasPrototypeSelectionItem">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isPrototypeSelectionItemOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionExplanans"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem"/>
+        <rdfs:comment>A role relating the explanans to one of its explainable parts, that is in this</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRule -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRule">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isRuleOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+        <rdfs:comment>The role relating a rule to the set of decision rules (ie. knowledge base) it belongs to.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleChild -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleChild">
+        <rdfs:subPropertyOf rdf:resource="http://www.odp.org/tree#hasChild"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleParent"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <rdfs:comment>An edge in a RuleDerivationTree indicating the child of a node where the rule resides. Afterall, a RuleDerivationNode should include both a Rulechild and some FactChild.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleParent -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleParent">
+        <rdfs:subPropertyOf rdf:resource="http://www.odp.org/tree#hasParent"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <rdfs:seeAlso rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleChild"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSalienceMapItem -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSalienceMapItem">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainablePart"/>
+        <owl:inverseOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isSalienceMapItemOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapExplanans"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapItem"/>
+        <rdfs:comment>A role relating the Explanans to one of its interpretable parts that is in this case a SalienceMapItem.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isConceptualizedBy -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isConceptualizedBy">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:comment>This object property is taken from Docle+D&amp;S Ultralite. It is used to state that &apos;&apos;an Agent is internally representing a Description&apos;&apos;. In the same sense, the explanation is conceptualised by the KB.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainableProxyOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainableProxyOf">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxyExplanans"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplaining -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplaining">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+        <rdfs:comment>Relates the Explanans back to the Explanation it is explaining.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isFactOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isFactOf">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isFeatureImportanceItemOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isFeatureImportanceItemOf">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceItem"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceExplanans"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isFoilOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isFoilOf">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ContrastiveExplanandum"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isLocalExplanationOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isLocalExplanationOf">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanation"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanationExplanans"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isPrototypeSelectionItemOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isPrototypeSelectionItemOf">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionExplanans"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isRuleOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isRuleOf">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#isSalienceMapItemOf -->
+
+    <owl:ObjectProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isSalienceMapItemOf">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapItem"/>
+        <rdfs:range rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapExplanans"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#object -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#object"/>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"/>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#subject -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"/>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasAntecedent -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasAntecedent">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Relates the rule to its antecedent. It is in the form of a string, so no additional structure is added.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasConsequent -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasConsequent">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Relates a rule to its consequent. It is a string, so does not have additional structure.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFeatureName -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFeatureName">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceItem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Relates the FI-item to the name of that feature that is judged important.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasGraphicalInspection -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasGraphicalInspection">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasInspection"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#GraphicalModelInspectionExplanans"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Data property for a graphical explanation. Its type is a text, since a a graphical datatype does not exist. So, it is text to give a link.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasInspection -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasInspection">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ModelInspectionExplanans"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment>The data that contains the actual inspection item.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasMaskedInput -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasMaskedInput">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapItem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment>Relating a salience map item to a representation of the masked input showing where the attention laid.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasPrototypeID -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasPrototypeID">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment>Refers a prototype explanation to the ID of the prototype being referred to.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleRepresentation -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleRepresentation">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>A relation for a String representation of the rule captured in a Rule concept.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasStrength -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasStrength">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceItem"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapItem"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSupportingClassification -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSupportingClassification">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceItem"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapItem"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Relates a FeatureImportance/PrototypeSelecction/SalienceMap-item to the classification it supports.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTextualInspection -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTextualInspection">
+        <rdfs:subPropertyOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasInspection"/>
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#TextualModelInspectionExplanans"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Data property for a textual explanation.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTreeNodeLabel -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTreeNodeLabel">
+        <rdfs:domain rdf:resource="http://www.odp.org/tree#TreeNode"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTreeNodeSplitValue -->
+
+    <owl:DatatypeProperty rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTreeNodeSplitValue">
+        <rdfs:domain rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent">
+        <rdfs:comment>This class was taken from the D&amp;S Ultralite foundational ontology. It was also used in Tiddi&apos;s ontology as a concept for the agent that conceptualized an explanation. In our sense, we consider the KB/explanation algorithm to conceptualise the explanation.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#BayesianNetworkKnowledgeBase -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#BayesianNetworkKnowledgeBase">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableKnowledgeBase"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExpertSystemKnowledgeBase"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>This concept captures a Bayesian network.</rdfs:comment>
+        <rdfs:label>Bayesian Network</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ContrastiveExplanandum -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ContrastiveExplanandum">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFact"/>
+                        <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFoil"/>
+                        <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleExplanandum"/>
+        <rdfs:comment>An explanandum where not a simple fact, but a contrast between facts is explained.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionRules -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionRules">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExpertSystemKnowledgeBase"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFact"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRule"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>This concept captures a knowledge base consisting of rules and facts.</rdfs:comment>
+        <rdfs:label>Decision rules</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionRulesProxyExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionRulesProxyExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainableProxy"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionRules"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxyExplanans"/>
+        <rdfs:comment>A ML model that is being explained through an interpretable proxy method. In this case, the proxy method is a set of Decision Rules.</rdfs:comment>
+        <rdfs:label>Decision Rules Proxy</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTree -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTree">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExpertSystemKnowledgeBase"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:comment>This concept captures a knowledge base modelled as adecision tree.</rdfs:comment>
+        <rdfs:label>Decision tree</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeLeafNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeLeafNode">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.odp.org/tree#LeafNode"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode">
+        <rdfs:subClassOf rdf:resource="http://www.odp.org/tree#TreeNode"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTreeNodeLabel"/>
+                        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTreeNodeLabel"/>
+                        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasAncestor"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasChild"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasDescendant"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasParent"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasSibling"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A general Node concept representing a node of a DecisionTree.</rdfs:comment>
+        <rdfs:label>Decision Tree Node</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNonLeafNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNonLeafNode">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.odp.org/tree#NonLeafNode"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNonRootNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNonRootNode">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.odp.org/tree#NonRootNode"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeProxyExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeProxyExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainableProxy"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxyExplanans"/>
+        <rdfs:comment>An ML model that is being explained through an itnerpretable proxy. In this case, the proxy is a Decision Tree.</rdfs:comment>
+        <rdfs:label>Decision Tree Proxy</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeRootNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeRootNode">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.odp.org/tree#RootNode"/>
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#DeepNeuralNetwork -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DeepNeuralNetwork">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#NeuralNetwork"/>
+        <rdfs:comment>A neural network with more than one hidden layer.</rdfs:comment>
+        <rdfs:label>Deep neural network</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExpertSystemKnowledgeBase -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExpertSystemKnowledgeBase">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableKnowledgeBase"/>
+        <rdfs:label>Expert system knowledge base</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableKnowledgeBase -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableKnowledgeBase">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:comment>This concept should capture a Knowledge Base that can provide an explanation. It need not necessarily be a Knowledge Base that is so simple as to be naturally interpretable, nor need it be a transparent box (as per Guidotti et al (2017)). The only condition is that some way of presenting an explanation exists for the type of black box. So, the concept can capture an arbitrary black box.
+
+The individuals for e.g. rule-based expert system need not necessarily capture all rules and facts of the expert system. It is enough to have an individual that represent that KB without directly modelling each and every component of the KB.</rdfs:comment>
+        <rdfs:label>An explainable knowledge base.</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainablePartOf"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An Explanans consists may consists of several parts that themselves may require an explanation. These parts should be subconcepts of the general concept of an explainable part..</rdfs:comment>
+        <rdfs:label>Explainable Part</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableKnowledgeBase"/>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <rdfs:comment>An explainable proxy is a KB that is small enough to be easily interpretable for someone not specialised in the domain. Moreover, it performs the role of explaining an black box by approximating it. In other words, the small model explains the black box by proxy.</rdfs:comment>
+        <rdfs:label>Explainable proxy</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxyExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxyExplanans">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainableProxy"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainableProxy"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SelfExplanatoryExplanans"/>
+        <rdfs:comment>This concept captures an Explanans through an Explainable Proxy. A simplification of the ML model is learned, where the accuracy of the ML model is traded for an increase in interpretability. So, this concept should include a proxy, for example a set of Decision Rules, a Decision tree, or a lienar regression model.</rdfs:comment>
+        <rdfs:label>Explainable Proxy</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanation"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment>The part of the Explanation that is being explained by the Explanans.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplaining"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment>The part of the explanation that performs the actual explaining.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanandum"/>
+                        <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanans"/>
+                        <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanandum"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanans"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#isConceptualizedBy"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableKnowledgeBase"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The root concept for an Explanation.</rdfs:comment>
+        <rdfs:label>Explanation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeLeafNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeLeafNode">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode">
+        <rdfs:subClassOf rdf:resource="http://www.odp.org/tree#TreeNode"/>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasAncestor"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasChild"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasDescendant"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasParent"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasSibling"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Explanation Tree Node</rdfs:comment>
+        <rdfs:comment>The concept representing a node in the tree of explanations.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNonLeafNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNonLeafNode">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNonRootNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNonRootNode">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeRootNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeRootNode">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplanationTreeNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"/>
+                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"/>
+                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"/>
+                                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#object"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#object"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"/>
+                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <rdfs:comment>A Fact is a Triple in the sense of OWL. So, this fact should have subject, predicate and object.</rdfs:comment>
+        <rdfs:label>Fact</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFeatureImportanceItem"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceItem"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#OutcomeExplanationExplanans"/>
+        <rdfs:comment>Explanation through feature importance gives the most decisive features contributing of a particular classiifcation. An explanation can consist of multiple features.</rdfs:comment>
+        <rdfs:label>Feature Importance</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceItem -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#FeatureImportanceItem">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFeatureName"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasStrength"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSupportingClassification"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFeatureName"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasStrength"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSupportingClassification"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem"/>
+        <rdfs:label>A Feature Importance explanation consists of multiple FI items. One for each feature that is judged to be decisive enough to merit a mention.</rdfs:label>
+        <rdfs:label>Feature Importance Item</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#GraphicalModelInspectionExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#GraphicalModelInspectionExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasGraphicalInspection"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ModelInspectionExplanans"/>
+        <rdfs:comment>A ML model is inspected by presenting a set of images to the user.</rdfs:comment>
+        <rdfs:label>Graphical Model Inspeciton</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#LinearModel -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#LinearModel">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxy"/>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>A model obtained through some form of linear regression.</rdfs:comment>
+        <rdfs:label>Linear Model</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#LinearModelProxyExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#LinearModelProxyExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainableProxy"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LinearModel"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableProxyExplanans"/>
+        <rdfs:label>Linear Model Proxy</rdfs:label>
+        <rdfs:label>The explanation of a ML model through an interpretable proxy. In this case, the interpretable proxy is a linear model.</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanation -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanation">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <rdfs:comment>Explaining an outcome by explaining the decision of a classifier on a local subset of the data.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanationExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanationExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasLocalExplanation"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanation"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#OutcomeExplanationExplanans"/>
+        <rdfs:comment>The outcome of a ML model is explained by explaining the model locally. For example, the path taken in a Decision tree, the set of rules in a rule derivation, or a linear model on a local subset of the data.</rdfs:comment>
+        <rdfs:label>Local Explanation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainableKnowledgeBase"/>
+        <rdfs:comment>Intended to capture any type of explainable machine learning knowledge base. Since several model-agnostic explanation algorithms exist, any ML algorithm is explainable in the sense of this concept.</rdfs:comment>
+        <rdfs:label>Explainable Machine Learning Knowledge Base</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ModelInspectionExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ModelInspectionExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasInspection"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SelfExplanatoryExplanans"/>
+        <rdfs:comment>An ML model is explained through text or images.</rdfs:comment>
+        <rdfs:label>Model Inspection</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#NeuralNetwork -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#NeuralNetwork">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>This concept represennt a knowledge base that is a Neural Network.</rdfs:comment>
+        <rdfs:label>Neural network</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#OutcomeExplanationExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#OutcomeExplanationExplanans">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SelfExplanatoryExplanans"/>
+        <rdfs:comment>Outcome explanation is a type of ML interpretation where an algorithm is constructed that takes as input the ML model and a data point. It returns something that should help the user interpret the ML model.</rdfs:comment>
+        <rdfs:label>Outcome Explanation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasPrototypeSelectionItem"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#OutcomeExplanationExplanans"/>
+        <rdfs:comment>An outcome is explained by returning the most similar elements of the data set.</rdfs:comment>
+        <rdfs:label>Prototype Selection</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#PrototypeSelectionItem">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasPrototypeID"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasStrength"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSupportingClassification"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasPrototypeID"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasStrength"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSupportingClassification"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <rdfs:comment>A Prototype Selection Item is one of the multiple items together making up a Prototype Selection Explanation. Each Item corresponds with one example from the training set used for explanation.</rdfs:comment>
+        <rdfs:label>Prototype Selection item</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#ReinforcementMachineLearning -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ReinforcementMachineLearning">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>A machine learning process where good actions are reinforced by a reward and bad actions are punished.</rdfs:comment>
+        <rdfs:label>Reinforcement learning</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleRepresentation"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <rdfs:comment>A rule p_0,...,p_n -&gt; q_0,...,q_n. The structure is divided into antecedent and consequent.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleBasedExpertSystemKnowledgeBase -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleBasedExpertSystemKnowledgeBase">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExpertSystemKnowledgeBase"/>
+        <rdfs:comment>Concept intended to capture a rule based expert system without probabilistic rules.</rdfs:comment>
+        <rdfs:label>Rule based expert system knowledge base</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleBasedExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleBasedExplanans">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanationExplanans"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFact"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRule"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRule"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Concept for an explanation that combines a set of facts with a rule.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationLeafNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationLeafNode">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationLocalExplanation -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationLocalExplanation">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanation"/>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#TreePathLocalExplanation"/>
+        <rdfs:comment>A local explanation of a rule-based system that shows the derivation of a specific fact.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode">
+        <rdfs:subClassOf rdf:resource="http://www.odp.org/tree#TreeNode"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFactChild"/>
+                        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasRuleChild"/>
+                        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasAncestor"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasChild"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasDescendant"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasParent"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.odp.org/tree#hasSibling"/>
+                <owl:allValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A general Node concept intended for a RuleDerivationNode.</rdfs:comment>
+        <rdfs:label>Rule Derivation Node</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNonLeafNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNonLeafNode">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNonRootNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNonRootNode">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationRootNode -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationRootNode">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleDerivationNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleExplanandum -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#RuleExplanandum">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Rule"/>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSalienceMapItem"/>
+                <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapItem"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#OutcomeExplanationExplanans"/>
+        <rdfs:comment>An outcome is explained by showing the parts of the data point that played a major role in eliciting a particular classification.</rdfs:comment>
+        <rdfs:label>Salience Map</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapItem -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SalienceMapItem">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasMaskedInput"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasStrength"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSupportingClassification"/>
+                                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasMaskedInput"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasStrength"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSupportingClassification"/>
+                                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ExplainablePart"/>
+        <rdfs:comment>A Salience Map Item is a part of the Salience Map Explanation, which consists of a set of Salience Map Item concepts. For each attention example a unique Salience Map Item should be used.</rdfs:comment>
+        <rdfs:seeAlso>Salience Map Item</rdfs:seeAlso>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#SelfExplanatoryExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SelfExplanatoryExplanans">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanation"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplanans"/>
+                        <owl:hasSelf rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasSelf>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <owl:disjointWith rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#TransparentBoxExplanans"/>
+        <rdfs:comment>A concept for an axiom that does not have an explanation (in the domain).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#SemiSupervisedMachineLearning -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SemiSupervisedMachineLearning">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>A form of Machine Learning that includes techniques from both supervised learning as well as unsupervised learning.</rdfs:comment>
+        <rdfs:label>Semi-supervised learning</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#SimpleExplanandum -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SimpleExplanandum">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanandum"/>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFoil"/>
+                        <owl:someValuesFrom rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Fact"/>
+                    </owl:Restriction>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:comment>An Explanandum that simply explains one fact, instead of the contrast between two facts.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#SupervisedMachineLearning -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SupervisedMachineLearning">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>The standard form of ML where a function is learned based on a set of data points which features are a good predictor for a class label, which has been given for each data point.</rdfs:comment>
+        <rdfs:label>Supervised learning</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#SupportVectorMachine -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SupportVectorMachine">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>A type of function learning algorithm, where the decision boundary is supported by two vectors.</rdfs:comment>
+        <rdfs:label>Support vector machine</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#TextualModelInspectionExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#TextualModelInspectionExplanans">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasTextualInspection"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#ModelInspectionExplanans"/>
+        <rdfs:comment>An ML model is explained by presenting a textual inspection of the model to the user.</rdfs:comment>
+        <rdfs:label>Textual Model Inspection</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#TransparentBoxExplanans -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#TransparentBoxExplanans">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#Explanans"/>
+        <rdfs:comment>A Tramsparent Box is a ML model that is designed to be interpretable, instead of purely designed for optimal classification, with an ad-hoc explanation algorithm applied on top of it.</rdfs:comment>
+        <rdfs:label>Transparent Box</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#TreeEnsemble -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#TreeEnsemble">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>A set of decision trees, the aggregate of which will be outputted as the predicted result.</rdfs:comment>
+        <rdfs:label>Tree Ensemble</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#TreePathLocalExplanation -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#TreePathLocalExplanation">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTreeNode"/>
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#LocalExplanation"/>
+        <rdfs:comment>The local explanation a decision by a tree model, performed by showing the path i na tree that was followed to reach a classification.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- https://www.tno.nl/ontology/knowledgeBaseExplanation#UnsupervisedMachineLearning -->
+
+    <owl:Class rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#UnsupervisedMachineLearning">
+        <rdfs:subClassOf rdf:resource="https://www.tno.nl/ontology/knowledgeBaseExplanation#MachineLearningKnowledgeBase"/>
+        <rdfs:comment>A type of machine learning where the algorithm does not have access to the gold standard. It is often a form a clusting.</rdfs:comment>
+        <rdfs:label>Unsupervised learning</rdfs:label>
+    </owl:Class>
+    
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionRules"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#DecisionTree"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#LinearModel"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#NeuralNetwork"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#ReinforcementMachineLearning"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SemiSupervisedMachineLearning"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SupervisedMachineLearning"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#SupportVectorMachine"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#TreeEnsemble"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#UnsupervisedMachineLearning"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasExplainableProxy"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasFeatureImportanceItem"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasLocalExplanation"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasPrototypeSelectionItem"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#hasSalienceMapItem"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isExplainableProxyOf"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isFactOf"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isFeatureImportanceItemOf"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isLocalExplanationOf"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isPrototypeSelectionItemOf"/>
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isRuleOf"/>
+
+            <rdf:Description rdf:about="https://www.tno.nl/ontology/knowledgeBaseExplanation#isSalienceMapItemOf"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

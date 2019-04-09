@@ -1,0 +1,180 @@
+@prefix : <http://daselab.cs.wright.edu/data/ODP-Tree.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix odp-tree: <http://www.odp.org/tree#> .
+@base <http://daselab.cs.wright.edu/data/ODP-Tree.owl> .
+
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.odp.org/tree#edge
+odp-tree:edge rdf:type owl:ObjectProperty .
+
+
+###  http://www.odp.org/tree#hasAncestor
+odp-tree:hasAncestor rdf:type owl:ObjectProperty ;
+                     owl:inverseOf odp-tree:hasDescendant ;
+                     rdf:type owl:TransitiveProperty .
+
+
+###  http://www.odp.org/tree#hasChild
+odp-tree:hasChild rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf odp-tree:hasDescendant ;
+                  owl:inverseOf odp-tree:hasParent .
+
+
+###  http://www.odp.org/tree#hasDescendant
+odp-tree:hasDescendant rdf:type owl:ObjectProperty ,
+                                owl:TransitiveProperty .
+
+
+###  http://www.odp.org/tree#hasParent
+odp-tree:hasParent rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf odp-tree:hasAncestor .
+
+
+###  http://www.odp.org/tree#hasSibling
+odp-tree:hasSibling rdf:type owl:ObjectProperty ,
+                             owl:SymmetricProperty ,
+                             owl:IrreflexiveProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.odp.org/tree#hasOutDegree
+odp-tree:hasOutDegree rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.odp.org/tree#LeafNode
+odp-tree:LeafNode rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( odp-tree:TreeNode
+                                                             [ rdf:type owl:Class ;
+                                                               owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty odp-tree:hasChild ;
+                                                                                  owl:someValuesFrom owl:Thing
+                                                                                ]
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ,
+                                      [ owl:intersectionOf ( odp-tree:TreeNode
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty odp-tree:hasOutDegree ;
+                                                               owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                   owl:oneOf [ rdf:type rdf:List ;
+                                                                                               rdf:first 0 ;
+                                                                                               rdf:rest rdf:nil
+                                                                                             ]
+                                                                                 ]
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf odp-tree:TreeNode .
+
+
+###  http://www.odp.org/tree#NonLeafNode
+odp-tree:NonLeafNode rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Class ;
+                                           owl:complementOf odp-tree:LeafNode
+                                         ] ;
+                     rdfs:subClassOf odp-tree:TreeNode ,
+                                     [ rdf:type owl:Class ;
+                                       owl:complementOf [ rdf:type owl:Restriction ;
+                                                          owl:onProperty odp-tree:hasOutDegree ;
+                                                          owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                              owl:oneOf [ rdf:type rdf:List ;
+                                                                                          rdf:first 0 ;
+                                                                                          rdf:rest rdf:nil
+                                                                                        ]
+                                                                            ]
+                                                        ]
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty odp-tree:hasChild ;
+                                       owl:someValuesFrom odp-tree:TreeNode
+                                     ] .
+
+
+###  http://www.odp.org/tree#NonRootNode
+odp-tree:NonRootNode rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Class ;
+                                           owl:complementOf odp-tree:RootNode
+                                         ] ;
+                     rdfs:subClassOf odp-tree:TreeNode ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty odp-tree:hasParent ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass odp-tree:TreeNode
+                                     ] .
+
+
+###  http://www.odp.org/tree#RootNode
+odp-tree:RootNode rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( odp-tree:TreeNode
+                                                             [ rdf:type owl:Class ;
+                                                               owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty odp-tree:hasParent ;
+                                                                                  owl:someValuesFrom owl:Thing
+                                                                                ]
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf odp-tree:TreeNode .
+
+
+###  http://www.odp.org/tree#TreeNode
+odp-tree:TreeNode rdf:type owl:Class ;
+                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                    owl:onProperty odp-tree:hasAncestor ;
+                                    owl:allValuesFrom odp-tree:TreeNode
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty odp-tree:hasChild ;
+                                    owl:allValuesFrom odp-tree:TreeNode
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty odp-tree:hasDescendant ;
+                                    owl:allValuesFrom odp-tree:TreeNode
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty odp-tree:hasParent ;
+                                    owl:allValuesFrom odp-tree:TreeNode
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty odp-tree:hasSibling ;
+                                    owl:allValuesFrom odp-tree:TreeNode
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty odp-tree:hasOutDegree ;
+                                    owl:allValuesFrom xsd:integer
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty odp-tree:hasOutDegree ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onDataRange xsd:integer
+                                  ] .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.odp.org/tree#root
+odp-tree:root rdf:type owl:NamedIndividual .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
