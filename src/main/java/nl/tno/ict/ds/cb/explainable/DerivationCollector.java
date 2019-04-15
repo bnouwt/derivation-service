@@ -207,7 +207,7 @@ public class DerivationCollector {
 		model.add(explanation, hasExplanans, explanans);
 		model.add(explanans, hasRule, ruleIndividual);
 		model.add(ruleIndividual, hasRuleRepresentation,
-				ResourceFactory.createTypedLiteral(new String(rule.toShortString())));
+				ResourceFactory.createTypedLiteral(new String(rule.toString())));
 		model.add(explanation, hasOutDegree, ResourceFactory.createTypedLiteral(new Integer(matches.size())));
 		// DONE: add hasRule to show the rule that led to this derivation. A rule itself
 		// can also have an explanation.
@@ -234,7 +234,8 @@ public class DerivationCollector {
 					ResourceFactory.createTypedLiteral(conclusion.getObject().getURI(), XSDDatatype.XSDanyURI));
 		} else if (conclusion.getObject().isLiteral()) {
 			model.add(explanandum, object,
-					ResourceFactory.createStringLiteral(conclusion.getObject().getLiteralLexicalForm()));
+					ResourceFactory.createTypedLiteral(conclusion.getObject().getLiteralLexicalForm(),
+							conclusion.getObject().getLiteralDatatype()));
 		} else {
 			System.out.println("Something wrong, object is neither URI nor literal.");
 		}
@@ -321,20 +322,13 @@ public class DerivationCollector {
 					if (match.getSubject().isURI()) {
 						model.add(explanandumPrime, subject,
 								ResourceFactory.createTypedLiteral(match.getSubject().getURI(), XSDDatatype.XSDanyURI));
-					} else if (match.getSubject().isLiteral()) {
-						model.add(explanandumPrime, subject, ResourceFactory.createTypedLiteral(
-								match.getSubject().getLiteralLexicalForm(), match.getSubject().getLiteralDatatype()));
 					} else {
 						System.out.println("Something wrong, subject is not an URI.");
 					}
 					if (match.getPredicate().isURI()) {
 						model.add(explanandumPrime, predicate, ResourceFactory
 								.createTypedLiteral(match.getPredicate().getURI(), XSDDatatype.XSDanyURI));
-					} else if (match.getPredicate().isLiteral()) {
-						model.add(explanandumPrime, predicate,
-								ResourceFactory.createTypedLiteral(match.getPredicate().getLiteralLexicalForm(),
-										match.getPredicate().getLiteralDatatype()));
-					} else {
+					}  else {
 						System.out.println("Something wrong, since predicate is not an URI.");
 					}
 					if (match.getObject().isURI()) {
