@@ -45,6 +45,7 @@ public class DerivationCollector {
 	private Resource plasidoKnowledgeEngineRootNode;
 
 	private final static String ns = "https://www.tno.nl/ontology/knowledgeBaseExplanation#";
+	private final static String nsData = "https://www.tno.nl/data/knowledgeBaseExplanation#";
 	private final Model domainOntology;
 
 	// The InfGraph that produced the Derivation that is being collected.
@@ -59,9 +60,9 @@ public class DerivationCollector {
 
 		// create model for the concept of plasido knowledge engine.
 		plasidoKnowledgeEngine = ModelFactory.createDefaultModel();
-		plasidoKnowledgeEngineRootNode = plasidoKnowledgeEngine.createResource(ns + "PlasidoKnowledgeEngine");
+		plasidoKnowledgeEngineRootNode = plasidoKnowledgeEngine.createResource(nsData + "PlasidoKnowledgeEngine");
 		Resource ruleBasedExpertSystem = plasidoKnowledgeEngine
-				.createResource(ns + "RuleBasedExpertSystemKnowledgeBase");
+				.createResource(nsData + "RuleBasedExpertSystemKnowledgeBase");
 
 		plasidoKnowledgeEngine.add(plasidoKnowledgeEngineRootNode, type, ruleBasedExpertSystem);
 		plasidoKnowledgeEngine.add(plasidoKnowledgeEngineRootNode, type, namedIndividual);
@@ -186,10 +187,10 @@ public class DerivationCollector {
 		// DONE: keep track of place in the tree to not get identical URIs.
 		// build explanation/explanandum/explanans-object
 		Model model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-		Resource explanation = model.createResource(ns + "ExplanationIndividual" + suffix);
-		Resource explanandum = model.createResource(ns + "ExplanandumIndividual" + suffix);
-		Resource explanans = model.createResource(ns + "ExplanansIndividual" + suffix);
-		Resource ruleIndividual = model.createResource(ns + "RuleIndividual" + suffix);
+		Resource explanation = model.createResource(nsData + "ExplanationIndividual" + suffix);
+		Resource explanandum = model.createResource(nsData + "ExplanandumIndividual" + suffix);
+		Resource explanans = model.createResource(nsData + "ExplanansIndividual" + suffix);
+		Resource ruleIndividual = model.createResource(nsData + "RuleIndividual" + suffix);
 
 		// add individuals with correct relations
 		model.add(explanation, type, explanationConcept);
@@ -290,9 +291,9 @@ public class DerivationCollector {
 
 					// Dus bouw ook een nieuw model.
 					// DONE MAAR CHECK: regel naamgeving voor boomstructuur
-					Resource explanationPrime = model.createResource(ns + "ExplanationIndividualLeaf" + suffix + i);
-					Resource explanandumPrime = model.createResource(ns + "ExplanandumIndividualLeaf" + suffix + i);
-					Resource explanansPrime = model.createResource(ns + "ExplanansIndividualLeaf" + suffix + i);
+					Resource explanationPrime = model.createResource(nsData + "ExplanationIndividualLeaf" + suffix + i);
+					Resource explanandumPrime = model.createResource(nsData + "ExplanandumIndividualLeaf" + suffix + i);
+					Resource explanansPrime = model.createResource(nsData + "ExplanansIndividualLeaf" + suffix + i);
 
 					// add relations and instances
 					model.add(explanationPrime, type, explanationConcept);
@@ -363,11 +364,11 @@ public class DerivationCollector {
 
 				// DONE: add hasFact relation to one
 				// the corresponding Explanandum will be created in the recursive iteration.
-				model.add(explanans, hasFact, ResourceFactory.createResource(ns + "ExplanandumIndividual" + newSuffix));
+				model.add(explanans, hasFact, ResourceFactory.createResource(nsData + "ExplanandumIndividual" + newSuffix));
 
 				// add relation forward to the Explanation to be added one step downward.
 				model.add(explanation, hasExplanationChild,
-						ResourceFactory.createResource(ns + "ExplanationIndividual" + newSuffix));
+						ResourceFactory.createResource(nsData + "ExplanationIndividual" + newSuffix));
 
 				// recurse down the derivation tree.
 				model.add(combine((RuleDerivation) (derivations.next()), newSuffix));

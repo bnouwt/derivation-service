@@ -4,8 +4,10 @@ import java.util.Arrays;
 
 import org.apache.jena.graph.Node;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.Statement;
 import org.apache.jena.reasoner.rulesys.RuleContext;
 import org.apache.jena.reasoner.rulesys.builtins.BaseBuiltin;
@@ -15,10 +17,14 @@ import org.slf4j.LoggerFactory;
 public abstract class DerivationBaseBuiltin extends BaseBuiltin {
 
 	protected final static String ns = "https://www.tno.nl/ontology/knowledgeBaseExplanation#";
+	protected final static String nsData = "https://www.tno.nl/data/knowledgeBaseExplanation#";
 	protected final static String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 	protected final static String owl = "http://www.w3.org/2002/07/owl#";
 	protected final static String rdfs = "http://www.w3.org/2000/01/rdf-schema#";
 	protected final static String tree = "http://www.odp.org/tree#";	
+	
+	public final static Property rdfType = ResourceFactory.createProperty(rdf, "type");
+
 	
 	/**
 	 * Required for registering the builtin with jena. This works in combination
@@ -56,19 +62,7 @@ public abstract class DerivationBaseBuiltin extends BaseBuiltin {
 	 * @return The root node of the RDF model representing the knowledge base.
 	 */
 	public abstract Resource getKnowledgeBaseRootNode();
-	
 
-	/**
-	 * Last index should contain the output variable to bind to.
-	 * @return index containing the output variable to be bound to.
-	 */
-/*	protected int getOutputIndex() {
-		return getArgLength() - 1;
-	}
-*/
-
-
-	
 	
 
 	

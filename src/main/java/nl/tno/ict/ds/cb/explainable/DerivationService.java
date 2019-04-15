@@ -6,13 +6,11 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.jena.atlas.logging.Log;
 import org.apache.jena.fuseki.servlets.ActionREST;
 import org.apache.jena.fuseki.servlets.HttpAction;
 import org.apache.jena.fuseki.servlets.ServletOps;
 import org.apache.jena.graph.Graph;
 import org.apache.jena.graph.Triple;
-import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
@@ -31,6 +29,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DerivationService extends ActionREST {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static final String TRIPLE_REQUEST_PARAMETER_NAME = "triple";
 
