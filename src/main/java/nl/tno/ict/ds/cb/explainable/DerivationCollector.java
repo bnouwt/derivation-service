@@ -430,8 +430,8 @@ public class DerivationCollector {
 		// Get triple match from the clauseEntry id (watch out for mismatch of IDs
 		// because match.size == rule.size - builtins.size
 
-		for (ClauseEntry c : rule.getBody())
-			LOG.info("ClauseEntry: {}", c);
+		//for (ClauseEntry c : rule.getBody())
+		//	LOG.info("ClauseEntry: {}", c);
 
 		// make map from ClauseEntry to index in matches-list
 		// The matches-list does not include the Builtins.
@@ -447,44 +447,44 @@ public class DerivationCollector {
 			}
 
 		}
-		LOG.info("matchesIndexMap: {}", matchesIndexMap);
+		//LOG.info("matchesIndexMap: {}", matchesIndexMap);
 
 		Node[] output = new Node[((Functor) term).getImplementor().getArgLength()];
 		Node[] builtinVariables = ((Functor) term).getArgs();
 		for (int i = 0; i < output.length; i++) {
 			Node builtinVariable = builtinVariables[i];
-			LOG.info("BuiltinVariable {}", i);
+			//LOG.info("BuiltinVariable {}", i);
 
 			// identify the clauseEntry of the rule the variable resides
 			// first in the body
 			for (int j = 0; j < rule.getBody().length; j++) {
 				ClauseEntry c = rule.getBody()[j];
-				LOG.info("ClauseEntry {}", j);
+				//LOG.info("ClauseEntry {}", j);
 
 				if (c instanceof Functor) {
-					LOG.info("ClauseEntry instance of Functor/Builtin.");
+					//LOG.info("ClauseEntry instance of Functor/Builtin.");
 					continue;
 				} else if (c instanceof TriplePattern) {
-					LOG.info("ClauseEntry instance of Triple.");
+					//LOG.info("ClauseEntry instance of Triple.");
 					if (((TriplePattern) c).getSubject().equals(builtinVariable)) {
 						output[i] = matches.get(matchesIndexMap.get(c)).getSubject();
-						LOG.info("Match with subject:", ((TriplePattern) c).getSubject());
-						LOG.info("{} equals {}: {}", ((TriplePattern) c).getSubject(), builtinVariable,
-								((TriplePattern) c).getSubject().equals(builtinVariable));
+						//LOG.info("Match with subject:", ((TriplePattern) c).getSubject());
+						//LOG.info("{} equals {}: {}", ((TriplePattern) c).getSubject(), builtinVariable,
+						//		((TriplePattern) c).getSubject().equals(builtinVariable));
 					} else if (((TriplePattern) c).getPredicate().equals(builtinVariable)) {
 						output[i] = matches.get(matchesIndexMap.get(c)).getPredicate();
-						LOG.info("Match with predicate:", ((TriplePattern) c).getPredicate());
+						//LOG.info("Match with predicate:", ((TriplePattern) c).getPredicate());
 					} else if (((TriplePattern) c).getObject().equals(builtinVariable)) {
 						output[i] = matches.get(matchesIndexMap.get(c)).getObject();
-						LOG.info("Match with object:", ((TriplePattern) c).getObject());
-						LOG.info("{} equals {}: {}", ((TriplePattern) c).getObject(), builtinVariable,
-								((TriplePattern) c).getObject().equals(builtinVariable));
+						//LOG.info("Match with object:", ((TriplePattern) c).getObject());
+						//LOG.info("{} equals {}: {}", ((TriplePattern) c).getObject(), builtinVariable,
+						//		((TriplePattern) c).getObject().equals(builtinVariable));
 					} else {
-						LOG.info("No match!");
+						//LOG.info("No match!");
 					}
 
 				} else if (c instanceof Rule) {
-					LOG.info("Found instance of rule");
+					//LOG.info("Found instance of rule");
 				
 				}
 			}
@@ -492,28 +492,28 @@ public class DerivationCollector {
 			// only works for forward rules with heads of size 1
 			for (int j = 0; j < rule.getHead().length; j++) {
 				ClauseEntry c = rule.getHead()[j];
-				LOG.info("ClauseEntry HEAD {}", j);
+				//LOG.info("ClauseEntry HEAD {}", j);
 
 				if (c instanceof Functor) {
-					LOG.info("ClauseEntry instance of Functor/Builtin.");
+				//	LOG.info("ClauseEntry instance of Functor/Builtin.");
 					continue;
 				} else if (c instanceof TriplePattern) {
-					LOG.info("ClauseEntry instance of Triple.");
+				//	LOG.info("ClauseEntry instance of Triple.");
 					if (((TriplePattern) c).getSubject().equals(builtinVariable)) {
 						output[i] = conclusion.getSubject();
-						LOG.info("Match with subject:", ((TriplePattern) c).getSubject());
+				//		LOG.info("Match with subject:", ((TriplePattern) c).getSubject());
 					} else if (((TriplePattern) c).getPredicate().equals(builtinVariable)) {
 						output[i] = conclusion.getPredicate();
-						LOG.info("Match with predicate:", ((TriplePattern) c).getPredicate());
+				//		LOG.info("Match with predicate:", ((TriplePattern) c).getPredicate());
 					} else if (((TriplePattern) c).getObject().equals(builtinVariable)) {
 						output[i] = conclusion.getObject();
-						LOG.info("Match with object:", ((TriplePattern) c).getObject());
+				//		LOG.info("Match with object:", ((TriplePattern) c).getObject());
 					} else {
-						LOG.info("No match!");
+				//		LOG.info("No match!");
 					}
 
 				} else if (c instanceof Rule) {
-					LOG.info("Found instance of rule in head");
+				//	LOG.info("Found instance of rule in head");
 				}
 			}
 

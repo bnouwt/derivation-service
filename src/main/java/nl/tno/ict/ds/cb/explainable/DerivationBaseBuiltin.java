@@ -24,7 +24,7 @@ public abstract class DerivationBaseBuiltin extends BaseBuiltin {
 	protected final static String tree = "http://www.odp.org/tree#";	
 	
 	public final static Property rdfType = ResourceFactory.createProperty(rdf, "type");
-
+	protected String explanansLocalName;
 	
 	/**
 	 * Required for registering the builtin with jena. This works in combination
