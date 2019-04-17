@@ -84,8 +84,9 @@ public class DerivationCollector {
 	 * @param d A Derivation object that is modelled as a tree, containing each of
 	 *          the derivation steps that were used to obtain a specific result.
 	 * @return An RDF/OWL-model representing the Derivation.
+	 * @throws Exception 
 	 */
-	public Model combine(Derivation d) {
+	public Model combine(Derivation d) throws Exception {
 		// Model model = ModelFactory.createDefaultModel();
 
 		// Model base =
@@ -105,7 +106,7 @@ public class DerivationCollector {
 		model.add(treeODP);
 		model.add(domainOntology);
 
-		model.add(ResourceFactory.createResource(ns + "ExplanationIndividual"), type, rootNode);
+		model.add(ResourceFactory.createResource(nsData + "ExplanationIndividual"), type, rootNode);
 		model.setNsPrefixes(PrefixMapping.Standard);
 		// model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
 		// model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns/");
@@ -119,7 +120,7 @@ public class DerivationCollector {
 		return model.add(combine((RuleDerivation) d, ""));
 	}
 
-	public Model combine(RuleDerivation d, String suffix) {
+	public Model combine(RuleDerivation d, String suffix) throws Exception {
 		/** The rule which asserted this triple */
 		Rule rule = d.getRule();
 
@@ -173,8 +174,9 @@ public class DerivationCollector {
 	 * @param suffix     A suffix to uniquely identify all occurrences in the tree.
 	 * @return An RDF model in the structure describes by the ontology. It may need
 	 *         reasoning to infer inverse relations.
+	 * @throws Exception 
 	 */
-	public Model combine(RuleDerivation d, Rule rule, Triple conclusion, List<Triple> matches, String suffix) {
+	public Model combine(RuleDerivation d, Rule rule, Triple conclusion, List<Triple> matches, String suffix) throws Exception {
 		// the first node has the root conclusion
 		// The facts resulting in deriving the root need to be passed upwards,
 		// such that these facts can be unified with the explananda of the
@@ -209,10 +211,10 @@ public class DerivationCollector {
 		model.add(ruleIndividual, hasRuleRepresentation,
 				ResourceFactory.createTypedLiteral(new String(rule.toString())));
 		model.add(explanation, hasOutDegree, ResourceFactory.createTypedLiteral(new Integer(matches.size())));
-		// DONE: add hasRule to show the rule that led to this derivation. A rule itself
+		// add hasRule to show the rule that led to this derivation. A rule itself
 		// can also have an explanation.
 
-		// DONE: methode om de isConcpeutalizedBy methode op te halen.
+		// methode om de isConcpeutalizedBy methode op te halen.
 		model.add(plasidoKnowledgeEngine);
 		model.add(explanation, isConceptualizedBy, plasidoKnowledgeEngineRootNode);
 
@@ -222,12 +224,14 @@ public class DerivationCollector {
 					ResourceFactory.createTypedLiteral(conclusion.getSubject().getURI(), XSDDatatype.XSDanyURI));
 		} else {
 			System.out.println("Something wrong, subject is not an URI.");
+			throw(new Exception());
 		}
 		if (conclusion.getPredicate().isURI()) {
 			model.add(explanandum, predicate,
 					ResourceFactory.createTypedLiteral(conclusion.getPredicate().getURI(), XSDDatatype.XSDanyURI));
 		} else {
 			System.out.println("Something wrong, since predicate is not an URI.");
+			throw(new Exception());
 		}
 		if (conclusion.getObject().isURI()) {
 			model.add(explanandum, object,
@@ -238,6 +242,7 @@ public class DerivationCollector {
 							conclusion.getObject().getLiteralDatatype()));
 		} else {
 			System.out.println("Something wrong, object is neither URI nor literal.");
+			throw(new Exception());
 		}
 		
 		// extract explanations from Builtins
@@ -249,7 +254,7 @@ public class DerivationCollector {
 	}
 
 	private void extractRuleExplanations(RuleDerivation d, String suffix, Model model, Resource explanation,
-			Resource explanans) {
+			Resource explanans) throws Exception {
 		// loop over all Triple matches
 		for (int i = 0; i < d.getMatches().size(); i++) {
 			Triple match = d.getMatches().get(i);
@@ -265,33 +270,12 @@ public class DerivationCollector {
 				if (match == null) {
 					LOG.info("Builtin found. Processed in another loop.");
 
-					/*
-					 * // BuiltIn! but do one last check for ExplainableBuiltin ClauseEntry term =
-					 * rule.getBodyElement(i); if(((Functor)term).getImplementor() instanceof
-					 * DerivationBaseBuiltin) { DerivationBaseBuiltin expBuiltin =
-					 * (DerivationBaseBuiltin) ((Functor)term).getImplementor();
-					 * 
-					 * LOG.info("Found a builtin: {}", expBuiltin.getName()); // zo simpel als? om
-					 * uitleg op te halen model.add( expBuiltin.getExplanation(
-					 * ((Functor)term).getArgs(), explanans.getURI() ) ); for(int i1 = 0; i1 <
-					 * ((Functor)term).getArgs().length; i1++) {
-					 * LOG.info("Item {} from functorterms: {}", i1, ((Functor)term).getArgs()[i1]);
-					 * }
-					 * 
-					 * // haal KB model op model.add( expBuiltin.getKnowledgeBaseModel() );
-					 * model.add( explanation, isConceptualizedBy,
-					 * expBuiltin.getKnowledgeBaseRootNode() );
-					 * 
-					 * 
-					 * 
-					 * }
-					 */
+
 				} else {
 					// Fact
 					System.out.println("Found a fact: " + match.toString());
 
 					// Dus bouw ook een nieuw model.
-					// DONE MAAR CHECK: regel naamgeving voor boomstructuur
 					Resource explanationPrime = model.createResource(nsData + "ExplanationIndividualLeaf" + suffix + i);
 					Resource explanandumPrime = model.createResource(nsData + "ExplanandumIndividualLeaf" + suffix + i);
 					Resource explanansPrime = model.createResource(nsData + "ExplanansIndividualLeaf" + suffix + i);
@@ -311,25 +295,23 @@ public class DerivationCollector {
 					model.add(explanationPrime, hasExplanans, explanansPrime);
 					model.add(explanationPrime, hasOutDegree, ResourceFactory.createTypedLiteral(new Integer(0)));
 					model.add(explanationPrime, isConceptualizedBy, plasidoKnowledgeEngineRootNode);
-					// DONE: add hasFact relation from the previous explanans.
+					
+					// add hasFact relation from the previous explanans.
 					model.add(explanans, hasFact, explanandumPrime);
 					
-					// DONE: maak de explanandum zodat ie het feit heeft.
-					// add the triple to the explanandum
-					// check for object whether literal or URI
-					// DONE: change rules for economicState, since it has a literal in subject
-					// position.
 					if (match.getSubject().isURI()) {
 						model.add(explanandumPrime, subject,
 								ResourceFactory.createTypedLiteral(match.getSubject().getURI(), XSDDatatype.XSDanyURI));
 					} else {
 						System.out.println("Something wrong, subject is not an URI.");
+						throw(new Exception());
 					}
 					if (match.getPredicate().isURI()) {
 						model.add(explanandumPrime, predicate, ResourceFactory
 								.createTypedLiteral(match.getPredicate().getURI(), XSDDatatype.XSDanyURI));
 					}  else {
 						System.out.println("Something wrong, since predicate is not an URI.");
+						throw(new Exception());
 					}
 					if (match.getObject().isURI()) {
 						model.add(explanandumPrime, object,
@@ -339,9 +321,10 @@ public class DerivationCollector {
 								match.getObject().getLiteralLexicalForm(), match.getObject().getLiteralDatatype()));
 					} else {
 						System.out.println("Something wrong, object is neither URI nor literal.");
+						throw(new Exception());
 					}
 
-					// DONE: refereer terug naar top explanandum.
+					// refereer terug naar top explanandum.
 					model.add(explanation, hasExplanationChild, explanationPrime);
 
 					// maak de explanans self-explanatory
@@ -356,7 +339,6 @@ public class DerivationCollector {
 
 				LOG.info("Entering recursion for {}", match);
 
-				// DONE: add hasFact relation to one
 				// the corresponding Explanandum will be created in the recursive iteration.
 				model.add(explanans, hasFact, ResourceFactory.createResource(nsData + "ExplanandumIndividual" + newSuffix));
 
@@ -388,13 +370,7 @@ public class DerivationCollector {
 					// zo simpel als? om uitleg op te halen
 					model.add(expBuiltin.getExplanation(((Functor) term).getArgs(), expBuiltin.getArgLength(),
 							builtinInstantiatedVariables, explanans.getURI(), suffix));
-
-					LOG.info("Rule structure: {}", rule.toString());
-					for (int i1 = 0; i1 < ((Functor) term).getArgs().length; i1++) {
-						LOG.info("Item {} from functorterms: {}", i1, ((Functor) term).getArgs()[i1]);
-						LOG.info("Item is variable: {}", ((Functor) term).getArgs()[i1].isVariable());
-					}
-
+					
 					// haal KB model op
 					model.add(expBuiltin.getKnowledgeBaseModel());
 					model.add(explanation, isConceptualizedBy, expBuiltin.getKnowledgeBaseRootNode());
@@ -418,15 +394,6 @@ public class DerivationCollector {
 	 * @return The instantiated variables for the Builtin.
 	 */
 	private Node[] getBuiltinArguments(ClauseEntry term, Rule rule, List<Triple> matches, Triple conclusion) {
-		// foreach variable in the Builtin
-		// identify the clauseEntry in which it resides (may be head or body)
-		// identify whether the variable is at subject, predicate or object position
-		// Get triple match from the clauseEntry id (watch out for mismatch of IDs
-		// because match.size == rule.size - builtins.size
-
-		//for (ClauseEntry c : rule.getBody())
-		//	LOG.info("ClauseEntry: {}", c);
-
 		// make map from ClauseEntry to index in matches-list
 		// The matches-list does not include the Builtins.
 		Map<ClauseEntry, Integer> matchesIndexMap = new HashMap<ClauseEntry, Integer>();

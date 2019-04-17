@@ -76,14 +76,10 @@ public class DerivationService extends ActionREST {
 
 		InfGraph ig = (InfGraph) g;
 
-		//TODO: check backwards reasoning rules
 		
 		// check if derivations are enabled
 		// apparently, we cannot check this! See
 		// org.apache.jena.reasoner.rulesys.BasicForwardRuleInfGraph.shouldLogDerivations()
-
-		//Iterator<Triple> findIterator = ig.find(t);
-		//LOG.info("FindIterator has items?: {}", findIterator.hasNext());
 		
 		// retrieve the derivations of the given triple
 		Iterator<Derivation> derIter = ig.getDerivation(t);
@@ -119,9 +115,10 @@ public class DerivationService extends ActionREST {
 			
 				RDFDataMgr.write(action.response.getOutputStream(), ontModel, Lang.RDFXML);
 				action.response.getOutputStream().flush();
-			} catch (IOException e) {
+			} catch ( Exception e) {
 				e.printStackTrace();
-			}
+			} 
+			
 		}
 		
 		action.response.setStatus(HttpSC.OK_200);
