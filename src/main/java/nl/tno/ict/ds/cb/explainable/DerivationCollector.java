@@ -50,7 +50,6 @@ public class DerivationCollector {
 	private final static String nsData = "https://www.tno.nl/data/knowledgeBaseExplanation#";
 	private final static String owl = "http://www.w3.org/2002/07/owl#";
 	private final static String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns/";
-	private final Model domainOntology;
 
 	// The InfGraph that produced the Derivation that is being collected.
 	// Is a workaround since RuleDerivation does not have a getInfGraph-method,
@@ -58,9 +57,8 @@ public class DerivationCollector {
 	// changes to Jena.
 	private InfGraph infGraph;
 
-	public DerivationCollector(InfGraph infGraph, Model domainOntology) {
+	public DerivationCollector(InfGraph infGraph) {
 		this.infGraph = infGraph;
-		this.domainOntology = domainOntology;
 
 		// create model for the concept of plasido knowledge engine.
 		plasidoKnowledgeEngine = ModelFactory.createDefaultModel();
@@ -96,7 +94,12 @@ public class DerivationCollector {
 		ont.addImport(model.createResource("http://ontology.tno.nl/KnowledgeBaseExplanation.owl"));
 		ont.addImport(model.createResource("http://daselab.cs.wright.edu/data/ODP-Tree.owl"));
 		
-		model.add(domainOntology);
+		// we cannot import this model from online, because the online file is incorrect
+		// see also readme and the thesis.
+		Model treeODP = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+		InputStream is2 = DerivationCollector.class.getResourceAsStream("/ODP-TreeWorkingCopy.ttl");
+		treeODP.read(is2,ns,"TURTLE");
+		model.add(treeODP);
 
 		model.add(ResourceFactory.createResource(nsData + "ExplanationIndividual"), type, rootNode);
 		model.setNsPrefixes(PrefixMapping.Standard);

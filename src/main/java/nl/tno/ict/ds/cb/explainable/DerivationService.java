@@ -100,10 +100,7 @@ public class DerivationService extends ActionREST {
 		}
 		*/
 		
-		Model mortgageOntology = ModelFactory.createDefaultModel();
-		InputStream is = DerivationCollector.class.getResourceAsStream("/proofOfConcept.ttl");
-		mortgageOntology.read(is, ns, "TURTLE");
-		DerivationCollector derivationCollector = new DerivationCollector(ig, mortgageOntology);
+		DerivationCollector derivationCollector = new DerivationCollector(ig);
 
 		Derivation d;
 		while(derIter.hasNext()) {
