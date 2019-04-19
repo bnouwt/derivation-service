@@ -92,10 +92,10 @@ public class DerivationCollector {
 		OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 		Ontology ont = model.createOntology("");
 		ont.addImport(model.createResource("http://ontology.tno.nl/KnowledgeBaseExplanation.owl"));
-		ont.addImport(model.createResource("http://daselab.cs.wright.edu/data/ODP-Tree.owl"));
 		
 		// we cannot import this model from online, because the online file is incorrect
 		// see also readme and the thesis.
+		// ont.addImport(model.createResource("http://daselab.cs.wright.edu/data/ODP-Tree.owl"));
 		Model treeODP = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 		InputStream is2 = DerivationCollector.class.getResourceAsStream("/ODP-TreeWorkingCopy.ttl");
 		treeODP.read(is2,ns,"TURTLE");
