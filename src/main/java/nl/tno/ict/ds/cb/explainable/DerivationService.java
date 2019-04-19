@@ -113,7 +113,7 @@ public class DerivationService extends ActionREST {
 				//rdfModel.write(action.response.getOutputStream(), "TURTLE");
 				LOG.info("Writing the model to outputstream");
 			
-				RDFDataMgr.write(action.response.getOutputStream(), ontModel, Lang.RDFXML);
+				RDFDataMgr.write(action.response.getOutputStream(), ontModel, Lang.TURTLE);
 				action.response.getOutputStream().flush();
 			} catch ( Exception e) {
 				e.printStackTrace();

@@ -10,7 +10,9 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.graph.Node;
 import org.apache.jena.graph.Triple;
+import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
+import org.apache.jena.ontology.Ontology;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
@@ -46,6 +48,8 @@ public class DerivationCollector {
 
 	private final static String ns = "https://www.tno.nl/ontology/knowledgeBaseExplanation#";
 	private final static String nsData = "https://www.tno.nl/data/knowledgeBaseExplanation#";
+	private final static String owl = "http://www.w3.org/2002/07/owl#";
+	private final static String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns/";
 	private final Model domainOntology;
 
 	// The InfGraph that produced the Derivation that is being collected.
@@ -87,30 +91,15 @@ public class DerivationCollector {
 	 * @throws Exception 
 	 */
 	public Model combine(Derivation d) throws Exception {
-		// Model model = ModelFactory.createDefaultModel();
-
-		// Model base =
-		// ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
-		Model explanationOntology = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-		InputStream is = DerivationCollector.class.getResourceAsStream("/KnowledgeBaseExplanationNoIndividuals.owl");
-		explanationOntology.read(is, ns, "RDF/XML");
-
-		Model treeODP = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-		InputStream is2 = DerivationCollector.class.getResourceAsStream("/ODP-TreeWorkingCopy.ttl");
-		explanationOntology.read(is2, ns, "TURTLE");
-
-		// Model model =
-		// ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
-		Model model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-		model.add(explanationOntology);
-		model.add(treeODP);
+		OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+		Ontology ont = model.createOntology("");
+		ont.addImport(model.createResource("http://ontology.tno.nl/KnowledgeBaseExplanation.owl"));
+		ont.addImport(model.createResource("http://daselab.cs.wright.edu/data/ODP-Tree.owl"));
+		
 		model.add(domainOntology);
 
 		model.add(ResourceFactory.createResource(nsData + "ExplanationIndividual"), type, rootNode);
 		model.setNsPrefixes(PrefixMapping.Standard);
-		// model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
-		// model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns/");
-		// model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema/");
 		model.setNsPrefix("xml", "http://www.w3.org/XML/1998/namespace");
 		model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema/");
 		model.setNsPrefix("tno", "https://www.tno.nl/ontology/knowledgeBaseExplanation#");
