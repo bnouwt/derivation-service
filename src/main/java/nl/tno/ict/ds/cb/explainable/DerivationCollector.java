@@ -62,7 +62,7 @@ public class DerivationCollector {
 		plasidoKnowledgeEngine = ModelFactory.createDefaultModel();
 		plasidoKnowledgeEngineRootNode = plasidoKnowledgeEngine.createResource(nsData + "PlasidoKnowledgeEngine");
 		Resource ruleBasedExpertSystem = plasidoKnowledgeEngine
-				.createResource(nsData + "RuleBasedExpertSystemKnowledgeBase");
+				.createResource(ns + "RuleBasedExpertSystemKnowledgeBase");
 
 		plasidoKnowledgeEngine.add(plasidoKnowledgeEngineRootNode, type, ruleBasedExpertSystem);
 		plasidoKnowledgeEngine.add(plasidoKnowledgeEngineRootNode, type, namedIndividual);
