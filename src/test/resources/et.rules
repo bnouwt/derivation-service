@@ -1,9 +1,0 @@
-@prefix tno: <http://tno.nl/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> . 
-
-#ET: Estimated Time of Departure/Arrival. 
-
-[calcETA: (?a rdf:type tno:Ship) (?a tno:speed ?b) -> (?a tno:arrival "late")]
-
-[calcETD: (?a rdf:type tno:Ship) (?a tno:arrival ?b) (?c rdf:type tno:Truck) (?c tno:picksUpFrom ?a) -> (?c tno:departure "later")]
