@@ -11,4 +11,4 @@ Most important classes:
 - *DerivationContextListener.java*: contains code to inspect and modify existing datasets in the Apache Jena Fuseki server to enable the derivation service.
 - *DerivationServiceTest.java*: contains a JUnit test that registers the derivation service in an embedded Apache Jena Fuseki instance and allows you to test it _manually_.
 
-![Powered by Apache Jena](https://www.apache.org/logos/poweredby/jena.png "Powered by Apache Jena")
+<img src="https://www.apache.org/logos/poweredby/jena.png" alt="Powered by Apache Jena" width="50"/><span>&nbsp;&nbsp;Powered by Apache Jena</span>
